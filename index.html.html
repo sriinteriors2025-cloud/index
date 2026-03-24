@@ -84,12 +84,12 @@
 <div class="container" id="loginPage">
     <h1>🔒 Enter Password</h1>
     <input type="password" id="password" placeholder="Enter secret password">
-    <button onclick="checkPassword()">Unlock ❤️</button>
+    <button onclick="checkPassword()">Unlock 💛</button>
     <p id="error" style="color:red; display:none;">Wrong password 😢</p>
 </div>
 
 <div class="container hidden" id="messagePage">
-    <h1>💌 Secret Message</h1>
+    <h1>Hey Pondati💛</h1>
 
     <div class="countdown" id="countdown"></div>
 
@@ -134,7 +134,7 @@
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
             const seconds = Math.floor((diff / 1000) % 60);
 
-            countdownEl.innerHTML = ` ${days}d ${hours}h ${minutes}m ${seconds}s <br>Advance Happy birthday Pondati💛`;
+            countdownEl.innerHTML = ` ${days}d ${hours}h ${minutes}m ${seconds}s <br>Advance Happy birthday`;
         }
 
         updateCountdown();
