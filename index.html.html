@@ -1,95 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secret Message</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Love Message</title>
+<style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #1e1e2f, #3a0ca3);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
     }
 
     .container {
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        text-align: center;
+        width: 90%;
+        max-width: 350px;
+    }
+
+    h1 {
+        color: #ff4d6d;
+        font-size: 22px;
     }
 
     input {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      margin-top: 10px;
-      font-size: 16px;
+        width: 75%;
+        padding: 12px;
+        margin-top: 15px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 16px;
     }
 
     button {
-      margin-top: 15px;
-      padding: 12px;
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      background: #ff4d6d;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
+        margin-top: 15px;
+        padding: 12px;
+        width: 75%;
+        border: none;
+        border-radius: 10px;
+        background: #ff4d6d;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
     }
 
     button:hover {
-      background: #ff1e4d;
+        background: #e63950;
     }
 
-    .message-page {
-      display: none;
-      text-align: center;
-      animation: fadeIn 1s ease-in-out;
+    .hidden {
+        display: none;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);} 
-      to {opacity: 1; transform: translateY(0);} 
+    .message {
+        font-size: 18px;
+        color: #333;
+        line-height: 1.6;
     }
-  </style>
+
+    .countdown {
+        margin-top: 15px;
+        font-size: 20px;
+        color: #ff4d6d;
+        font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+        h1 { font-size: 18px; }
+        .message { font-size: 16px; }
+        .countdown { font-size: 18px; }
+    }
+</style>
 </head>
 <body>
 
 <div class="container" id="loginPage">
-  <h2>🔐 Enter Secret Code</h2>
-  <input type="password" id="code" placeholder="Enter code...">
-  <button onclick="unlock()">Unlock</button>
+    <h1>🔒 Enter Password</h1>
+    <input type="password" id="password" placeholder="Enter secret password">
+    <button onclick="checkPassword()">Unlock ❤️</button>
+    <p id="error" style="color:red; display:none;">Wrong password 😢</p>
 </div>
 
-<div class="container message-page" id="messagePage">
-  <h2>❤️ Secret Message ❤️</h2>
-  <p style="font-size:18px;">
-    You opened a special page just for you 💖<br><br>
-    "You are the most important person in my life 💕"
-  </p>
+<div class="container hidden" id="messagePage">
+    <h1>💌 Secret Message</h1>
+
+    <div class="countdown" id="countdown"></div>
+
+    <p class="message">
+        No matter how many problems come in life,
+        I just want you to know one thing...
+        <br><br>
+        I will always stand by your side ❤️
+        <br><br>
+        You are my happiness, my peace, my everything 💕
+        <br><br>
+        Waiting to celebrate your special day together 🎂💖
+    </p>
 </div>
 
 <script>
-  function unlock() {
-    const code = document.getElementById('code').value;
+    const correctPassword = "love123"; // Change password here
 
-    if(code === "1234") {
-      document.getElementById('loginPage').style.display = 'none';
-      document.getElementById('messagePage').style.display = 'block';
-    } else {
-      alert("Wrong code! 😢");
+    function checkPassword() {
+        const input = document.getElementById("password").value;
+        const error = document.getElementById("error");
+
+        if(input === correctPassword) {
+            document.getElementById("loginPage").classList.add("hidden");
+            document.getElementById("messagePage").classList.remove("hidden");
+            startCountdown();
+        } else {
+            error.style.display = "block";
+        }
     }
-  }
+
+    function startCountdown() {
+        const countdownEl = document.getElementById("countdown");
+
+        function updateCountdown() {
+            const now = new Date();
+            let year = now.getFullYear();
+
+            // Target: May 10
+            let birthday = new Date(year, 4, 10); // Month is 0-based (4 = May)
+
+            // If birthday passed this year, set for next year
+            if (now > birthday) {
+                birthday = new Date(year + 1, 4, 10);
+            }
+
+            const diff = birthday - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            countdownEl.innerHTML = `🎉 ${days}d ${hours}h ${minutes}m ${seconds}s left for your birthday ❤️`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
 </script>
 
 </body>
