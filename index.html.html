@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secret Message</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #3a0ca3);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 12px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff1e4d;
+    }
+
+    .message-page {
+      display: none;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);} 
+      to {opacity: 1; transform: translateY(0);} 
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="loginPage">
+  <h2>🔐 Enter Secret Code</h2>
+  <input type="password" id="code" placeholder="Enter code...">
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<div class="container message-page" id="messagePage">
+  <h2>❤️ Secret Message ❤️</h2>
+  <p style="font-size:18px;">
+    You opened a special page just for you 💖<br><br>
+    "You are the most important person in my life 💕"
+  </p>
+</div>
+
+<script>
+  function unlock() {
+    const code = document.getElementById('code').value;
+
+    if(code === "1234") {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('messagePage').style.display = 'block';
+    } else {
+      alert("Wrong code! 😢");
+    }
+  }
+</script>
+
+</body>
+</html>
